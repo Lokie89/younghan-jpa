@@ -261,6 +261,15 @@
     <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
     
     추가하면 테이블 명이나 컬럼명이 생략된 필드를 언더스코어 표기법 ( 스네이크 케이스 )으로 매핑한다.
+    
+#### 4-5 DDL 생성 기능
+###### 코드 추가
+    1. Member 클래스 username 필드에 nullable length 추가
+    2. Member 클래스 @Table 어노테이션에 uniqueConstraints 속성 추가
+###### 정리
+    @Column 어노테이션 속성 중 nullable, length 속성으로 not null, 문자 크기 를 지정할 수 있음
+    이런 기능들은 단지 DDL 을 자동 생성할 때만 사용되고 JPA 의 실행 로직에는 영향을 주지 않는다.
+
 #### 1-1
 ###### 코드 추가
 ###### maven 추가
