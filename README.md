@@ -233,6 +233,34 @@
     자바의 날짜 타입은 @Temporal 어노테이션으로 매핑해야 함
     필드에 길이 제한이 없을 경우 데이터베이스의 VARCHAR 대신 CLOB 타입을 저장해야 함, @Lob 어노테이션으로 매핑해야함
 
+#### 4-4 데이터베이스 스키마 자동 생성
+###### 정리
+    클래스의 매핑 정보를 보면 어떤 테이블에 어떤 컬럼을 사용하는지 알 수 있다.
+    JPA 는 이 매핑정보와 데이터베이스 방언을 사용해서 데이터베이스 스키마를 생성한다.
+    
+    persistence.xml 추가
+    <property name="hibernate.hbm2ddl.auto" value="create"/>
+    
+    이 속성을 추가 하면 애플리케이션 실행 시점에 데이터베이스 테이블을 자동으로 생성한다.
+    
+    스키마 자동 생성 기능을 사용하면 애플리케이션 실행 시점에 데이터베이스 테이블이 자동으로 생성되므로
+    개발자가 테이블을 직접 생성하는 수고를 덜 수 있다.
+    하지만 스키마 자동 생성 기능이 만든 DDL 은 운영 환경에서 사용할 만큼 완벽하지는 않으므로
+    개발 환경에서 사용하거나 매핑을 어떻게 해야 하는지 참고하는 정도로만 사용하는 것이 좋다.
+    
+    hibernate.hbm2ddl.auto 속성
+    create : DROP + CREATE
+    create-drop : DROP + CREATE + DROP ( 애플리케이션 종료 시 )
+    update : 변경 사항 수정
+    validate : 테이블 비교하여 차이가 있으면 경고를 남기고 애플리케이션을 실행하지 않음
+    none : 자동생성 기능을 사용하지 않음.
+    
+    RoleType 처럼 단어 ( Role ) 와 단어 ( Type ) 를 구분할 때
+    자바는 카멜 케이스 roleType 이며 데이터 베이스는 스네이크 케이스 role_type 를 관례적으로 사용한다.
+    
+    <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+    
+    추가하면 테이블 명이나 컬럼명이 생략된 필드를 언더스코어 표기법 ( 스네이크 케이스 )으로 매핑한다.
 #### 1-1
 ###### 코드 추가
 ###### maven 추가

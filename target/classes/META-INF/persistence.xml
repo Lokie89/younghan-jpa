@@ -13,6 +13,13 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.new_generator_mappings" value="true"/>
+
+            <!-- 테이블 자동 생성 !-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+
+            <!-- Snake case 사용 !-->
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+
         </properties>
     </persistence-unit>
 </persistence>
