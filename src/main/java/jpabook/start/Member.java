@@ -15,6 +15,16 @@ public class Member {
 
     @Id
     @Column(name = "ID")
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY 전략
+    // Sequence 전략
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+//            generator = "BOARD_SEQ_GENERATOR")
+//    @SequenceGenerator(
+//            name = "BOARD_SEQ-GENERATOR",
+//            sequenceName = "BOARD_SEQ", // 매핑할 데이터베이스 시퀀스 이름
+//            initialValue = 1,
+//            allocationSize = 1
+//    )
     private String id;
 
     @Column(name = "NAME", nullable = false, length = 10)
