@@ -14,7 +14,7 @@ import java.util.Date;
 public class Member {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "MEMBER_ID")
     //    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY 전략
     // Sequence 전략
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -31,6 +31,10 @@ public class Member {
     private String username;
     private Integer age;
 
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
@@ -42,4 +46,14 @@ public class Member {
 
     @Lob
     private String description;
+
+
+    public Member() {
+
+    }
+
+    public Member(String id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 }
