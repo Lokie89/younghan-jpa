@@ -287,8 +287,15 @@
         5. AUTO 전략
             데이터베이스 방언에 따라 IDENTITY, SEQUENCE, TABLE 전략 중 하나를 자동으로 선택
             
+#### 4-7 필드와 컬럼 매핑 레퍼런스
+###### 정리
+    @Column : 객체 필드를 테이블 컬럼에 매핑
+    @Enumerated : enum 타입을 매핑
+    @Temporal : 날짜 타입을 매핑
+    @Lob : 데이터베이스 BLOB, CLOB 타입과 매핑
+    @Transient : 이 필드는 매핑하지 않음
+    @Access : JPA 가 엔티티 데이터에 접근하는 방식을 지정
+
 #### 1-1
-###### 코드 추가
 ###### maven 추가
-###### 문제점
 ###### 정리
