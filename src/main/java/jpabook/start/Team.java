@@ -13,14 +13,14 @@ public class Team {
     @Id
     @GeneratedValue
     @Column(name = "TEAM_ID")
-    private String id;
+    private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID") // MEMBER 테이블의 TEAM_ID (FK)
     private List<Member> members = new ArrayList<Member>();
 
-    public Team(String id, String name) {
-        this.id = id;
+    public Team(String name) {
         this.name = name;
     }
 

@@ -26,7 +26,7 @@ public class JpaMain {
     }
 
     private static void logic(EntityManager em) {
-        String id = "id1";
+        Long id = 1L;
         Member member = new Member();
         member.setId(id);
         member.setUsername("지한");
@@ -50,16 +50,16 @@ public class JpaMain {
     public void testSave(EntityManager em) {
 
         // 팀1 저장
-        Team team1 = new Team("team1", "팀1");
+        Team team1 = new Team("팀1");
         em.persist(team1);
 
         // 회원1 저장
-        Member member1 = new Member("member1", "회원1");
+        Member member1 = new Member("회원1");
         member1.setTeam(team1);
         em.persist(member1);
 
         // 회원2 저장
-        Member member2 = new Member("member2", "회원2");
+        Member member2 = new Member("회원2");
         member2.setTeam(team1);
         em.persist(member2);
     }
@@ -67,14 +67,14 @@ public class JpaMain {
     public void testSaveNonOwner(EntityManager em) {
 
         // 회원1 저장
-        Member member1 = new Member("member1", "회원1");
+        Member member1 = new Member("회원1");
         em.persist(member1);
 
         // 회원2 저장
-        Member member2 = new Member("member2", "회원2");
+        Member member2 = new Member("회원2");
         em.persist(member2);
 
-        Team team1 = new Team("team1", "팀1");
+        Team team1 = new Team("팀1");
         // 주인이 아닌 곳만 연관관계 설정
         team1.getMembers().add(member1);
         team1.getMembers().add(member2);
@@ -85,17 +85,17 @@ public class JpaMain {
     public void testORM_양방향(EntityManager em) {
 
         // 팀1 저장
-        Team team1 = new Team("team1", "팀1");
+        Team team1 = new Team("팀1");
         em.persist(team1);
 
-        Member member1 = new Member("member1", "회원1");
+        Member member1 = new Member("회원1");
 
         // 양방향 연관관계 설정
         member1.setTeam(team1); // 연관관계 설정 member1 -> team1
         team1.getMembers().add(member1); // 연관관계 설정 team1 -> member1
         em.persist(member1);
 
-        Member member2 = new Member("member2", "회원2");
+        Member member2 = new Member("회원2");
         // 양방향 연관관계 설정
         member2.setTeam(team1); // 연관관계 설정 member2 -> team1
         team1.getMembers().add(member2); // 연관관계 설정 team1 -> member2
@@ -117,7 +117,7 @@ public class JpaMain {
     private static void updateRelation(EntityManager em) {
 
         // 새로운 팀2
-        Team team2 = new Team("team2", "팀2");
+        Team team2 = new Team("팀2");
         em.persist(team2);
 
         // 회원 1에 새로운 팀2 설정
@@ -135,5 +135,18 @@ public class JpaMain {
         Team team = member1.getTeam();
         member1.setTeam(null);
         em.remove(team);
+    }
+
+    public void testSave2(EntityManager em) {
+        Member member1 = new Member("member1");
+        Member member2 = new Member("member2");
+
+        Team team1 = new Team("team1");
+        team1.getMembers().add(member1);
+        team1.getMembers().add(member2);
+
+        em.persist(member1); // Insert member1
+        em.persist(member2); // Insert member2
+        em.persist(team1); // Insert team, update member1.fk, update member2.fk
     }
 }
