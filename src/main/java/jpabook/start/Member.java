@@ -56,4 +56,11 @@ public class Member {
         this.id = id;
         this.username = username;
     }
+
+    public void setTeam(Team team) {
+        this.team = team;
+        if (!team.getMembers().contains(this)) {
+            team.getMembers().add(this);
+        }
+    }
 }
