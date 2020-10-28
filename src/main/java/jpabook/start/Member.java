@@ -37,6 +37,12 @@ public class Member {
             updatable = false)
     private Team team;
 
+
+    // 양방향
+    @OneToOne(mappedBy = "member")
+//    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
