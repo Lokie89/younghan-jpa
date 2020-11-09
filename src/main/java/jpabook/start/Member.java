@@ -3,7 +3,9 @@ package jpabook.start;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -36,6 +38,21 @@ public class Member {
     @JoinColumn(name = "TEAM_ID", insertable = false,
             updatable = false)
     private Team team;
+
+
+    // 다대다
+    @JoinTable(name = "MEMBER_PRODUCT",
+            joinColumns = @JoinColumn(name = "MEMBER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @ManyToMany(mappedBy = "MEMBER_ID") // 다대다 양방향
+    private List<Product> products = new ArrayList<Product>();
+
+
+    @OneToMany(mappedBy = "member") // 역방향
+    private List<MemberProduct> memberProducts;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<Order>();
 
 
     // 양방향
