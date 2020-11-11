@@ -17,7 +17,7 @@ public class DetachMain {
         try {
             tx.begin();
             Member member = new Member();
-            member.setId("memberA");
+            member.setId(1L);
             member.setUsername("회원A");
 
             em.persist(member);
